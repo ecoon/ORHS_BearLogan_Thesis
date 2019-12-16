@@ -1,0 +1,30 @@
+Domain geometry:
+Slope/Grade = 6.0%
+Depth = 50 m
+Length = 1 km
+Grid Cells = 100
+
+Impervious surface geometry:
+Patch Initial Pos: x0 = 400 [m]
+Patch Final Pos: x1 = 600 [m]
+Patch Depth = 10 [cm]
+
+Hydrologic forcing:
+Precipitation Rate (m/s) (Volume/time/Area) P(t) = 10 mm/hr
+Precipitation duration = 3 hr
+
+Geologic properties:
+Soil Porosity = 0.45 (Organic Silt)
+Soil Ksat = 8.06 (Silt Loam)
+Soil Water Retention Curve (Silt Loam) (van Genuchten parameters):
+	θr = 0.20 [cm3cm-3]
+	θs = 0.60 [cm3cm-3]
+	α = 0.005 [Pa-1]
+	n = 1.3 [-]
+	Sr = 0.33 [-]
+Patch Porosity = 1%
+Patch Ksat = 10^-16 m^2
+Patch Water Retention Curve (van Genuchten parameters):  s_r (residual sat) = 0 [-], alpha=10^-4 [1/Pa], n=2 [-]
+
+Simulation control parameters
+End time: t = 24 hr
