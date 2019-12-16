@@ -2,50 +2,44 @@
   <ParameterList name="regions" type="ParameterList">
     <ParameterList name="computational domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,0.0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{100.0,1.0,15.0}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,-10000.0}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{1000.0,1.0,10000.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
         <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{100.0,1.0}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{1000.0,1.0}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface outlet" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{0.0,1.0}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{1000.0,0.0}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{1000.0,1.0}" />
       </ParameterList>
     </ParameterList>
+
     <ParameterList name="surface" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="2" />
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="file" type="string" value="../impervious_hillslope.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="face" />
       </ParameterList>
     </ParameterList>
-    <ParameterList name="computational domain rest" type="ParameterList">
+
+    <ParameterList name="soil" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
-        <Parameter name="label" type="string" value="10" />
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="label" type="string" value="101" />
+        <Parameter name="file" type="string" value="../impervious_hillslope.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="Cell" />
       </ParameterList>
     </ParameterList>
-    <ParameterList name="computational domain first slab" type="ParameterList">
+    <ParameterList name="parking lot" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
-        <Parameter name="label" type="string" value="12" />
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
-        <Parameter name="format" type="string" value="Exodus II" />
-        <Parameter name="entity" type="string" value="Cell" />
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="computational domain second slab" type="ParameterList">
-      <ParameterList name="region: labeled set" type="ParameterList">
-        <Parameter name="label" type="string" value="11" />
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="label" type="string" value="102" />
+        <Parameter name="file" type="string" value="../impervious_hillslope.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="Cell" />
       </ParameterList>
@@ -64,7 +58,7 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <ParameterList name="read mesh file parameters" type="ParameterList">
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="file" type="string" value="../impervious_hillslope.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
@@ -211,7 +205,7 @@
         <Parameter name="use surface rel perm" type="bool" value="true" />
         <ParameterList name="WRM parameters" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain rest" />
+            <Parameter name="region" type="string" value="soil" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
             <Parameter name="van Genuchten alpha" type="double" value="0.005" />
             <Parameter name="van Genuchten n" type="double" value="1.3" />
@@ -219,7 +213,7 @@
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="parking lot" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain first slab" />
+            <Parameter name="region" type="string" value="parking lot" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
             <Parameter name="van Genuchten alpha" type="double" value="0.005" />
             <Parameter name="van Genuchten n" type="double" value="1.3" />
@@ -464,7 +458,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain rest" />
+            <Parameter name="region" type="string" value="soil" />
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -473,7 +467,7 @@
             </ParameterList>
           </ParameterList>
           <ParameterList name="parking lot" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain first slab" />
+            <Parameter name="region" type="string" value="parking lot" />
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -491,12 +485,12 @@
         <Parameter name="field evaluator type" type="string" value="compressible porosity" />
         <ParameterList name="compressible porosity model parameters" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain rest" />
+            <Parameter name="region" type="string" value="soil" />
             <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-8" />
             <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="1E-8" />
           </ParameterList>
           <ParameterList name="parking lot" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain first slab" />
+            <Parameter name="region" type="string" value="parking lot" />
             <Parameter name="pore compressibility [Pa^-1]" type="double" value="5.113922e-8" />
             <Parameter name="pore compressibility inflection point [Pa^-1]" type="double" value="1E-8" />
           </ParameterList>
@@ -508,7 +502,7 @@
         <Parameter name="constant in time" type="bool" value="true" />
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="rest domain" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain rest" />
+            <Parameter name="region" type="string" value="soil" />
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -517,7 +511,7 @@
             </ParameterList>
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
-            <Parameter name="region" type="string" value="computational domain first slab" />
+            <Parameter name="region" type="string" value="parking lot" />
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
@@ -553,11 +547,11 @@
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,3600.0,-1.0}" />
     </ParameterList>
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="file name base" type="string" value="visdump_surface" />
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0,180.0,-1.0}" />
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,3600.0,-1.0}" />
     </ParameterList>
   </ParameterList>
 
